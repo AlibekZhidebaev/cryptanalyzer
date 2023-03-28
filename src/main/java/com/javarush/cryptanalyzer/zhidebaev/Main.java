@@ -8,6 +8,6 @@ public class Main {
     public static void main(String[] args) {
 //1234567890
         GUI gui = new GUI();
-        System.out.println(ALPHABET.length());
+        //System.out.println(ALPHABET.length());
     }
 }
