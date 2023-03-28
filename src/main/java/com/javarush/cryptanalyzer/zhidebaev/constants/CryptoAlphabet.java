@@ -5,6 +5,6 @@ public class CryptoAlphabet {
     private static final String lettersLowerCase ="абвгдеёжзийклмнопрстуфхцчшщъыьэюя";
     private static final String NUMBERS ="0123456789";
     private static final String SYMBOLS =".,\":-!? ";
-    public static final String ALPHABET = lettersUpperCase+lettersLowerCase+NUMBERS;
+    public static final String ALPHABET = lettersUpperCase+lettersLowerCase+NUMBERS+SYMBOLS;
     public static final int ALPHABET_SIZE = ALPHABET.length();
 }
