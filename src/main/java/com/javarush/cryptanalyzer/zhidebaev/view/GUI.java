@@ -76,11 +76,11 @@ public class GUI {
 //--------------------------------------Текстовые поля и области---------------------------------------------------------------
         txt_in_file = new JTextField();
         txt_in_file.setColumns(50);
-        txt_in_file.setText("D:\\JavaIDEdoki\\TXT\\input.txt");
+        txt_in_file.setText("\\files\\input.txt");
 
         txt_out_file = new JTextField();
         txt_out_file.setColumns(50);
-        txt_out_file.setText("D:\\JavaIDEdoki\\TXT\\output.txt");
+        txt_out_file.setText("\\files\\output.txt");
 
         keyField = new JTextField();
         keyField.setText("0");
