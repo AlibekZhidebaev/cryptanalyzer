@@ -1,19 +1,16 @@
 package com.javarush.cryptanalyzer.zhidebaev.view;
 
-import java.awt.SystemColor;
 import javax.swing.*;
-import java.awt.Font;
-import javax.swing.border.TitledBorder;
-import javax.swing.border.EtchedBorder;
-import java.awt.Color;
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 import javax.swing.border.EmptyBorder;
-public class GUI {
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.TitledBorder;
+import java.awt.*;
+
+public class GUI1 {
 
     private JTextField txt_in_file, txt_out_file , keyField, decode_key_field;
 
-    public GUI(){
+    public GUI1(){
 
 //---------------------------------------------Фрейм------------------------------------------------------------
 
@@ -25,18 +22,19 @@ public class GUI {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 //---------------------------------------------Панели------------------------------------------------------------
-//---------------------------------------------Панель заголовок------------------------------------------------------------
-        JPanel header = new JPanel();
-        header.setLayout(new BoxLayout(header, BoxLayout.Y_AXIS));
-//---------------------------------------------Панель для выбора режима------------------------------------------------------------
-        JPanel panel_mode = new JPanel();
-        panel_mode.setBorder(new TitledBorder(null, "\u0420\u0435\u0436\u0438\u043C \u0440\u0430\u0431\u043E\u0442\u044B", TitledBorder.CENTER, TitledBorder.TOP, null, null));
+
 //---------------------------------------------Основная панель для шифрования файла------------------------------------------------------------
         JPanel panel_encode = new JPanel();
         panel_encode.setLayout(new BoxLayout(panel_encode, BoxLayout.Y_AXIS));
         panel_encode.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)),
                 "\u0428\u0438\u0444\u0440\u043E\u0432\u0430\u043D\u0438\u0435 \u043C\u0442\u043E\u0434\u043E\u043C \u0426\u0435\u0437\u0430\u0440\u044F",
                 TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+
+//---------------------------------------------Панель для выбора режима------------------------------------------------------------
+        JPanel program_operation_mode = new JPanel();
+        FlowLayout fl_program_operation_mode = (FlowLayout) program_operation_mode.getLayout();
+        fl_program_operation_mode.setAlignment(FlowLayout.LEFT);
+
 
 //---------------------------------------------Панель для входного файла------------------------------------------------------------
         JPanel panel_input_file = new JPanel();
@@ -71,12 +69,7 @@ public class GUI {
         JPanel panel_decode_brutforce = new JPanel();
         JPanel other_decode = new JPanel();
 
-//----------------------------------------RadioButtons для режима выбора---------------------------------------------------------------------
-        JRadioButton radioButtonEncode = new JRadioButton("Шифрование");
-        radioButtonEncode.setSelected(true);
-        radioButtonEncode.setActionCommand("modeEncode");
-        JRadioButton radioButtonDecode = new JRadioButton("Дешифрование");
-        radioButtonDecode.setActionCommand("modeDecode");
+
 //----------------------------------------Labels---------------------------------------------------------------------
 
         JLabel in_file = new JLabel("Исходный файл:    ");
@@ -121,9 +114,6 @@ public class GUI {
 //-------------------------------------------------Кнопки----------------------------------------------------------------------------
         JButton encode = new JButton("Зашифровать");
 
-//-------------------------------------------Добавление элементов в панель  выбора --------------------------------------------------------
-        panel_mode.add(radioButtonEncode);
-        panel_mode.add(radioButtonDecode);
 //-------------------------------------------Добавление элементов в панель  входного файла --------------------------------------------------------
 
         panel_input_file.add(in_file);
@@ -144,7 +134,6 @@ public class GUI {
 //-------------------------------------------Добавление элементов в панель текстовой области для расшифрования---------------------------------------
 
         panel_decode.add(text_area_for_encode);
-
 //------------------Полосы прокрутки для text area-------------------------------
         JScrollPane scrollPane = new JScrollPane(text_area_for_encode,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         panel_decode.add(scrollPane);
@@ -154,20 +143,19 @@ public class GUI {
         panel_decode_brutforce.add(decode_key_field);
         panel_decode_brutforce.add(slider_for_decode);
 
-//-------------------------------------------Добавление панелей в панель заголовка ----------------------------------------------------------------
-        header.add(panel_mode);
-        header.add(panel_encode);
-
 //-------------------------------------------Добавление панелей на  панель шифрования, дешифрования -----------------------------------------------
+
 
         panel_encode.add(panel_input_file);
         panel_encode.add(panel_output_file);
         panel_encode.add(panel_key_and__encrypt_button);
+
         panel_decode_buttons.add(panel_decode_brutforce);
         panel_decode_buttons.add(other_decode);
 
 //----------------------------------------Добавление панелей на Главную панель----------------------------------------------------------------------
-        frame.getContentPane().add(header, BorderLayout.NORTH);
+        frame.getContentPane().add(program_operation_mode, BorderLayout.NORTH);
+        frame.getContentPane().add(panel_encode, BorderLayout.NORTH);
         frame.getContentPane().add(panel_decode, BorderLayout.CENTER);
         frame.getContentPane().add(panel_decode_buttons, BorderLayout.SOUTH);
 

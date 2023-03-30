@@ -34,7 +34,7 @@ public class Decode {
     public char encode(int key,char symbol){
         int offsetNumber = -key;
         char changedCharacter = symbol;
-        if(symbol!='\n') {
+        if(ALPHABET.lastIndexOf(symbol)!=-1) {
             int positionIndex = ALPHABET.lastIndexOf(symbol) + offsetNumber;
             if (positionIndex > (ALPHABET_SIZE - 1)) {
                 positionIndex = positionIndex - ALPHABET_SIZE;
