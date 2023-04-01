@@ -9,13 +9,13 @@ import java.awt.Color;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import javax.swing.border.EmptyBorder;
-public class GUI {
+public class GUIView implements View {
     private final JFrame frame;
     private final JPanel  panel_decode, panel_decode_buttons;
     private JTextField txt_in_file, txt_out_file , keyField, decode_key_field;
     private JRadioButton radioButtonEncode,radioButtonDecode, radioButtonOtherDecode;
     private JButton buttonEncode, buttonDecode;
-    public GUI(){
+    public GUIView(){
 
 //---------------------------------------------Фрейм------------------------------------------------------------
 
@@ -217,6 +217,11 @@ public class GUI {
         panel_decode_buttons.setVisible(true);
         frame.setSize(715, 500);
         //frameReboot();
+    }
+
+    @Override
+    public String[] getParametrs() {
+        return new String[0];
     }
 
 //    void frameReboot(){

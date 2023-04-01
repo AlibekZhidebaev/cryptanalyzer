@@ -8,8 +8,8 @@ import static com.javarush.cryptanalyzer.zhidebaev.constants.CryptoAlphabet.ALPH
 import static com.javarush.cryptanalyzer.zhidebaev.constants.CryptoAlphabet.ALPHABET_SIZE;
 
 public class Decode {
-    String src = "files//output.txt";
-    String dest = "files//decoded.txt";
+    String src = "files//decoded.txt";
+    String dest = "files//output.txt";
     // char changedCharacter;
     public Decode() throws IOException {
         try (

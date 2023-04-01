@@ -10,7 +10,7 @@ import static com.javarush.cryptanalyzer.zhidebaev.constants.CryptoAlphabet.ALPH
 
 public class fileIO {
     String src = "files//input.txt";
-    String dest = "files//output.txt";
+    String dest = "files//decoded.txt";
    // char changedCharacter;
     public fileIO() throws IOException {
         try (
