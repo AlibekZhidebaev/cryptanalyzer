@@ -10,19 +10,24 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import javax.swing.border.EmptyBorder;
 public class GUI {
-
+    private final JFrame frame;
+    private final JPanel  panel_decode, panel_decode_buttons;
     private JTextField txt_in_file, txt_out_file , keyField, decode_key_field;
-
+    private JRadioButton radioButtonEncode,radioButtonDecode, radioButtonOtherDecode;
+    private JButton buttonEncode, buttonDecode;
     public GUI(){
 
 //---------------------------------------------Фрейм------------------------------------------------------------
 
-        JFrame frame = new JFrame("Шифратор и дешифратор");
+        frame = new JFrame("Шифратор и дешифратор");
         frame.setResizable(false);
         frame.getContentPane().setBackground(SystemColor.inactiveCaption);
         frame.getContentPane().setLayout(new BorderLayout(0, 0));
-        frame.setSize(715, 500);
+        //frame.setSize(715, 500);
+        frame.setSize(715, 215);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.isMaximumSizeSet();
+       // frame.setDefaultCloseOperation(JFrame.);
 
 //---------------------------------------------Панели------------------------------------------------------------
 //---------------------------------------------Панель заголовок------------------------------------------------------------
@@ -57,26 +62,35 @@ public class GUI {
 
 //---------------------------------------------Панель для  текстового поля----------------------------------------------------------------------
 
-        JPanel panel_decode = new JPanel();
+        panel_decode = new JPanel();
         panel_decode.setLayout(new BoxLayout(panel_decode, BoxLayout.X_AXIS));
         panel_decode.setBackground(UIManager.getColor("RadioButtonMenuItem.background"));
         panel_decode.setBorder(new TitledBorder(null, "\u0420\u0430\u0441\u0448\u0438\u0444\u0440\u043E\u0432\u043A\u0430 \u0442\u0435\u043A\u0441\u0442\u0430",
                 TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
-
+        panel_decode.setVisible(false);
 //----------------------------------------Панель инструментов для расшифровки----------------------------------------------------------------------
 
-        JPanel panel_decode_buttons = new JPanel();
+        panel_decode_buttons = new JPanel();
         panel_decode_buttons.setLayout(new BoxLayout(panel_decode_buttons, BoxLayout.Y_AXIS));
+        panel_decode_buttons.setVisible(false);
 
         JPanel panel_decode_brutforce = new JPanel();
         JPanel other_decode = new JPanel();
 
+
 //----------------------------------------RadioButtons для режима выбора---------------------------------------------------------------------
-        JRadioButton radioButtonEncode = new JRadioButton("Шифрование");
+        radioButtonEncode = new JRadioButton("Шифрование");
         radioButtonEncode.setSelected(true);
         radioButtonEncode.setActionCommand("modeEncode");
-        JRadioButton radioButtonDecode = new JRadioButton("Дешифрование");
+
+        radioButtonDecode = new JRadioButton("Дешифрование");
         radioButtonDecode.setActionCommand("modeDecode");
+
+        radioButtonOtherDecode = new JRadioButton("Дешифрование Brut force и статистический анализатор");
+
+        radioButtonEncode.addActionListener(e->setSelectedEncode());
+        radioButtonDecode.addActionListener(e->setSelectedDecode());
+        radioButtonOtherDecode.addActionListener(e->setSelectedOtherDecode());
 //----------------------------------------Labels---------------------------------------------------------------------
 
         JLabel in_file = new JLabel("Исходный файл:    ");
@@ -119,11 +133,16 @@ public class GUI {
         slider_for_decode.setMajorTickSpacing(21);
 
 //-------------------------------------------------Кнопки----------------------------------------------------------------------------
-        JButton encode = new JButton("Зашифровать");
+        buttonEncode = new JButton("Зашифровать");
+        buttonDecode = new JButton("Расшифровать");
+        buttonDecode.setVisible(false);
+        buttonEncode.addActionListener(e-> System.out.println("1"));
+        buttonDecode.addActionListener(e-> System.out.println("2"));
 
 //-------------------------------------------Добавление элементов в панель  выбора --------------------------------------------------------
         panel_mode.add(radioButtonEncode);
         panel_mode.add(radioButtonDecode);
+        panel_mode.add(radioButtonOtherDecode);
 //-------------------------------------------Добавление элементов в панель  входного файла --------------------------------------------------------
 
         panel_input_file.add(in_file);
@@ -139,7 +158,9 @@ public class GUI {
 
         panel_key_and__encrypt_button.add(keyText);
         panel_key_and__encrypt_button.add(keyField);
-        panel_key_and__encrypt_button.add(encode);
+        panel_key_and__encrypt_button.add(buttonEncode);
+        panel_key_and__encrypt_button.add(buttonDecode);
+
 
 //-------------------------------------------Добавление элементов в панель текстовой области для расшифрования---------------------------------------
 
@@ -174,5 +195,32 @@ public class GUI {
 //--------------------------------------------------------------------------------------------------------------------------------------------------
 
         frame.setVisible(true);
+        frame.setResizable(true);
     }
+    void setSelectedEncode(){
+        radioButtonDecode.setSelected(false);radioButtonOtherDecode.setSelected(false);
+        buttonDecode.setVisible(false);buttonEncode.setVisible(true);
+        frame.setSize(715, 215);
+        //frameReboot();
+    }
+    void setSelectedDecode(){
+        radioButtonEncode.setSelected(false);radioButtonOtherDecode.setSelected(false);
+        buttonEncode.setVisible(false);buttonDecode.setVisible(true);
+        frame.setSize(715, 215);
+        //frameReboot();
+    }
+
+    void setSelectedOtherDecode(){
+        radioButtonOtherDecode.setSelected(true);radioButtonEncode.setSelected(false);radioButtonDecode.setSelected(false);
+        buttonEncode.setVisible(false);buttonDecode.setVisible(true);
+        panel_decode.setVisible(true);
+        panel_decode_buttons.setVisible(true);
+        frame.setSize(715, 500);
+        //frameReboot();
+    }
+
+//    void frameReboot(){
+//        frame.setResizable(true);
+//
+//    }
 }
