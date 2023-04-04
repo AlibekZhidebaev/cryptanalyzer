@@ -7,11 +7,11 @@ import com.javarush.cryptanalyzer.zhidebaev.services.Function;
 
 
 public class Application {
-    private MainConroller maincontroller;
+    private final MainConroller maincontroller;
     private FunctionCode functioncode;
     public Application(MainConroller maincontroller) {
 
-        this.maincontroller = maincontroller;
+        this.maincontroller = maincontroller; 
     }
 
     public Result run() {
