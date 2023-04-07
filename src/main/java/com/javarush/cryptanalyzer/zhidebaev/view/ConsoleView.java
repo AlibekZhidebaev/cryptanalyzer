@@ -3,25 +3,30 @@ package com.javarush.cryptanalyzer.zhidebaev.view;
 import java.util.Scanner;
 
 public class ConsoleView implements View{
-    private int choiceNumber;
+    private int choiceNumber ;
     private String choice;
 
     public ConsoleView(){
 
+        System.out.println("Select operation:\n"
+                + "1.ENCODE\n"
+                + "2.DECODE\n"
+                + "3.Brute force\n"
+                + "4.Statistical analysis\n"
+        );
 
-        System.out.println("Select operation: "
-                + "\n 1.ENCODE"
-                + "\n 2.DECODE");
+        try (Scanner scan = new Scanner(System.in)) {
 
-        Scanner scan = new Scanner(System.in);
-        choiceNumber = scan.nextInt();
-        switch(choiceNumber) {
-            case 1: choice = "ENCODE";break;
-            case 2: choice = "DECODE";break;
-            // default: choice = "ENCODE";
+            choiceNumber = scan.nextInt();
+
+            switch(choiceNumber) {
+                case 1: choice = "ENCODE"; break;
+                case 2: choice = "DECODE"; break;
+                case 3: choice = "BRUTEFORCE"; break;
+                case 4: choice = "STAT_ANALYSIS"; break;
+                default: choice = "NONEXISTCLASS"; break;
+            }
         }
-        scan.close();
-
     }
     @Override
     public String[] getParametrs() {

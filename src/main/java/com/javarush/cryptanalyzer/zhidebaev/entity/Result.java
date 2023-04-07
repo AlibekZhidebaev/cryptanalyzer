@@ -8,7 +8,7 @@ public class Result {
     private ResultCode resultcode;
     @Override
     public String toString() {
-        return "ENCODE operation completed successfully = " + resultcode + "\n"
+        return "Operation completed successfully = " + resultcode + "\n"
                 + "ERROR: " + applicationexception;
     }
 

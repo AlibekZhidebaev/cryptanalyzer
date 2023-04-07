@@ -5,7 +5,10 @@ import com.javarush.cryptanalyzer.zhidebaev.services.*;
 public enum FunctionCode {
 
     ENCODE (new Encoder()),
-    DECODE (new Decoder());
+    DECODE (new Decoder()),
+    BRUTEFORCE (new BruteForcer()),
+    STAT_ANALYSIS (new StatAnalysis()),
+    NONEXISTCLASS (new NonExistingClass());
 
     private final Function function;
 
