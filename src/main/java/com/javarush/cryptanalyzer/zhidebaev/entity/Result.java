@@ -6,12 +6,6 @@ import com.javarush.cryptanalyzer.zhidebaev.repository.ResultCode;
 public class Result {
 
     private ResultCode resultcode;
-    @Override
-    public String toString() {
-        return "Operation completed successfully = " + resultcode + "\n"
-                + "ERROR: " + applicationexception;
-    }
-
     private ApplicationException applicationexception;
 
     public ResultCode getResultcode() {
@@ -31,5 +25,11 @@ public class Result {
         super();
         this.resultcode = resultcode;
         this.applicationexception = applicationexception;
+    }
+
+    @Override
+    public String toString() {
+        return "Operation completed successfully = " + resultcode + "\n"
+                + "ERROR: " + applicationexception;
     }
 }
