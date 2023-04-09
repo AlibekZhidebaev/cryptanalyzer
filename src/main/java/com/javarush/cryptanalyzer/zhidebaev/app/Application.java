@@ -6,7 +6,6 @@ import com.javarush.cryptanalyzer.zhidebaev.entity.Result;
 public class Application {
     private MainController maincontroller;
 
-
     public Application(MainController maincontroller) {
         this.maincontroller = maincontroller;
     }
