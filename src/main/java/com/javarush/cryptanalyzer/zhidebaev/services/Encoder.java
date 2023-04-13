@@ -1,42 +1,30 @@
 package com.javarush.cryptanalyzer.zhidebaev.services;
 
 import com.javarush.cryptanalyzer.zhidebaev.constants.CryptoAlphabet;
+import com.javarush.cryptanalyzer.zhidebaev.constants.FileConstants;
 import com.javarush.cryptanalyzer.zhidebaev.entity.Result;
 import com.javarush.cryptanalyzer.zhidebaev.exception.ApplicationException;
 import com.javarush.cryptanalyzer.zhidebaev.repository.ResultCode;
+import com.javarush.cryptanalyzer.zhidebaev.utilities.Encode;
 
 import java.io.FileReader;
 import java.io.FileWriter;
 
 public class Encoder implements Function{
-    String sourceFile = "text//input.txt";
-    String destinationFile = "text//encoded.txt";
-    int key =3;
-
-    public char encode(int key, char symbol) {
-        int offsetNumber = key;
-        char changedCharacter = symbol;
-        
-        if (CryptoAlphabet.ALPHABET.lastIndexOf(symbol) != -1) {
-            int positionIndex = CryptoAlphabet.ALPHABET.lastIndexOf(symbol) + offsetNumber;
-            if (positionIndex > (CryptoAlphabet.ALPHABET_SIZE - 1)) {
-                positionIndex = positionIndex - CryptoAlphabet.ALPHABET_SIZE;
-            }
-            if (positionIndex < 0) {
-                positionIndex = positionIndex + CryptoAlphabet.ALPHABET_SIZE;
-            }
-            changedCharacter = CryptoAlphabet.ALPHABET.charAt(positionIndex);
-        }
-        return changedCharacter;
-    }
 
     @Override
-    public Result execute() {
-        try (FileReader reader = new FileReader(sourceFile); FileWriter writer = new FileWriter(destinationFile)) {
-            System.out.println("works Encode");
+    public Result execute(String[] commandParameters) {
+        System.out.println("works Encode");
+        try (FileReader reader = new FileReader(commandParameters[0]); // -- Получение пути к файлу для чтения символов --
+             FileWriter writer = new FileWriter(commandParameters[1])) // -- Получение пути к файлу для записи символов --
+        {
+            int key = Integer.parseInt(commandParameters[2]); // -- Получение и преобразование ключа в целое число --
+            // -- Чтение файла до последнего символа --
             while (reader.ready()) {
-                char real = (char) reader.read();
-                writer.write(encode(key, real));
+                // --Посимвольное чтение --
+                char symbol = (char) reader.read();
+                // -- Кодирование прочтенного символа с помощью метода экземпляра класса Encode --
+                writer.write(new Encode().encode(symbol, key));
             }
 
         } catch (Exception ex) {

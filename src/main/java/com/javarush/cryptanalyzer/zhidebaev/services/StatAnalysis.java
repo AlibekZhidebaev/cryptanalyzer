@@ -6,7 +6,7 @@ import com.javarush.cryptanalyzer.zhidebaev.repository.ResultCode;
 
 public class StatAnalysis implements Function {
     @Override
-    public Result execute() {
+    public Result execute(String[] commandParameters) {
         try {
             System.out.println("works StatAnalysis");
         }catch(Exception ex) {

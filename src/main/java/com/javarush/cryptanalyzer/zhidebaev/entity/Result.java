@@ -8,6 +8,16 @@ public class Result {
     private ResultCode resultcode;
     private ApplicationException applicationexception;
 
+    public Result(ResultCode resultcode) {
+        super();
+        this.resultcode = resultcode;
+    }
+    public Result(ResultCode resultcode, ApplicationException applicationexception) {
+        super();
+        this.resultcode = resultcode;
+        this.applicationexception = applicationexception;
+    }
+
     public ResultCode getResultcode() {
         return resultcode;
     }
@@ -16,16 +26,6 @@ public class Result {
         return applicationexception;
     }
 
-    public Result(ResultCode resultcode) {
-        super();
-        this.resultcode = resultcode;
-    }
-
-    public Result(ResultCode resultcode, ApplicationException applicationexception) {
-        super();
-        this.resultcode = resultcode;
-        this.applicationexception = applicationexception;
-    }
 
     @Override
     public String toString() {

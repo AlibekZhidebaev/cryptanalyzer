@@ -5,6 +5,7 @@ import com.javarush.cryptanalyzer.zhidebaev.controller.MainController;
 import com.javarush.cryptanalyzer.zhidebaev.entity.Result;
 import com.javarush.cryptanalyzer.zhidebaev.view.View;
 
+// -- Исполняющий класс приложения --
 public class Run {
 
     public Run(View view) {

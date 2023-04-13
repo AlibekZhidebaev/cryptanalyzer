@@ -1,6 +1,6 @@
 package com.javarush.cryptanalyzer.zhidebaev.constants;
 
-public class CryptoAlphabet {
+public final class  CryptoAlphabet {
     private static final String lettersUpperCase ="АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
     private static final String lettersLowerCase ="абвгдеёжзийклмнопрстуфхцчшщъыьэюя";
     private static final String NUMBERS ="0123456789";

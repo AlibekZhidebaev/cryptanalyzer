@@ -1,43 +1,38 @@
 package com.javarush.cryptanalyzer.zhidebaev.services;
 
+import com.javarush.cryptanalyzer.zhidebaev.constants.FileConstants;
 import com.javarush.cryptanalyzer.zhidebaev.entity.Result;
 import com.javarush.cryptanalyzer.zhidebaev.exception.ApplicationException;
 import com.javarush.cryptanalyzer.zhidebaev.repository.ResultCode;
-import com.javarush.cryptanalyzer.zhidebaev.constants.CryptoAlphabet;
+import com.javarush.cryptanalyzer.zhidebaev.utilities.Decode;
+
 
 import java.io.FileReader;
 import java.io.FileWriter;
 
 public class Decoder implements Function{
-
-    String sourceFile = "text//encoded.txt";
-    String destinationFile = "text//output.txt";
+    // -- Путь к файлу для чтения символов --
+    String sourceFile = FileConstants.ENCODED_FILE;
+    // -- Путь к файлу для записи символов --
+    String destinationFile = FileConstants.OUTPUT_FILE;
     int key =3;
 
-    public char encode(int key, char symbol) {
-        int offsetNumber = -key;
-        char changedCharacter = symbol;
-        if (CryptoAlphabet.ALPHABET.lastIndexOf(symbol) != -1) {
-            int positionIndex = CryptoAlphabet.ALPHABET.lastIndexOf(symbol) + offsetNumber;
-            if (positionIndex > (CryptoAlphabet.ALPHABET_SIZE - 1)) {
-                positionIndex = positionIndex - CryptoAlphabet.ALPHABET_SIZE;
-            }
-            if (positionIndex < 0) {
-                positionIndex = positionIndex + CryptoAlphabet.ALPHABET_SIZE;
-            }
-            changedCharacter = CryptoAlphabet.ALPHABET.charAt(positionIndex);
-        }
-        return changedCharacter;
-    }
-
     @Override
-    public Result execute() {
-        try (FileReader reader = new FileReader(sourceFile); FileWriter writer = new FileWriter(destinationFile)) {
-            System.out.println("works Decode");
+    public Result execute(String[] commandParameters) {
+        System.out.println("works Decode");
+        try (FileReader reader = new FileReader(commandParameters[0]); // -- Получение пути к файлу для чтения символов --
+             FileWriter writer = new FileWriter(commandParameters[1])) // -- Получение пути к файлу для записи символов --
+        {
+            int key = Integer.parseInt(commandParameters[2]); // -- Получение и преобразование ключа в целое число --
+
+            // -- Чтение файла до последнего символа --
             while (reader.ready()) {
-                char real = (char) reader.read();
-                writer.write(encode(key, real));
+                // --Посимвольное чтение --
+                char symbol = (char) reader.read();
+                // -- Декодирование прочтенного символа с помощью метода экземпляра класса Decode --
+                writer.write(new Decode().decode(symbol, key));
             }
+
         } catch (Exception ex) {
             return new Result(ResultCode.ERROR, new ApplicationException("Decode error", ex));
         }

@@ -15,10 +15,12 @@ public class MainController {
     public View getView() {
         return view;
     }
-
-    public Result excecute (String mode) {
-        Function function = FunctionCode.find(mode);
-        Result result = function.execute();
+    // -- Метод для выполнения (excecute()) действия с заданными параметрами --
+    public Result execute (String command, String[] commandParameters) {
+        // -- Передаем параметр command в метод find() (найти) класса-списка FunctionCode и выполняем его --
+        Function function = FunctionCode.find(command);
+        // -- В метод execute() (выполнить),найденной команды, передаем параметр commandParameters и выполняем --
+        Result result = function.execute(commandParameters);
         return result;
     }
 }

@@ -1,16 +1,18 @@
 package com.javarush.cryptanalyzer.zhidebaev.view;
 
+import java.util.List;
+import java.util.Scanner;
 
 public class ConsoleView implements View{
-    private String command;
+    private List <String> parameters;
 
-    public ConsoleView(String command) {
-        this.command = command;
+    public ConsoleView(List<String> parameters) {
+        this.parameters = parameters;
     }
-
+    // -- Метод получающий список параметров с экземпляра класса-оболочки Console --
     @Override
-    public String[] getParametrs() {
-        String[] param = { command };
+    public String[] getParameters() {
+        String[] param = { parameters.get(0),parameters.get(1),parameters.get(2),parameters.get(3) };
         return param;
     }
 }

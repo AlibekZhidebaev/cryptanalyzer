@@ -4,22 +4,24 @@ import com.javarush.cryptanalyzer.zhidebaev.services.*;
 
 public enum FunctionCode {
 
-    ENCODE (new Encoder()),
-    DECODE (new Decoder()),
-    BRUTEFORCE (new BruteForcer()),
-    STAT_ANALYSIS (new StatAnalysis()),
-    NONEXISTCLASS (new NonExistingClass());
+    ENCODE (new Encoder()), // -- команда запускающий Кодировщик (класс Encoder()) --
+    DECODE (new Decoder()), // -- команда запускающий Декодер (класс Decoder()) --
+    BRUTEFORCE (new BruteForcer()), // -- команда запускающий Брут форс (класс BruteForcer()) --
+    STAT_ANALYSIS (new StatAnalysis()), // -- команда запускающий статистический анализатор (класс StatAnalysis()) --
+    NONEXISTCLASS (new NonExistingClass()); // -- команда указывающая на несуществующий класс (класс NonExistingClass()) --
 
     private final Function function;
-
     FunctionCode(Function function){
         this.function = function;
     }
     private Function getFunction() {
         return function;
     }
-    public static Function find(String mode) {
-        Function function = FunctionCode.valueOf(mode.toUpperCase()).getFunction();
+
+    // -- метод find() (найти) для поиска команды в текущем списке --
+    public static Function find(String command) {
+        // -- Преобразование данных и получение соответствующей команды с помощью метода getFunction() --
+        Function function = FunctionCode.valueOf(command.toUpperCase()).getFunction();
         return function;
     }
 }

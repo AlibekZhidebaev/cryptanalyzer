@@ -15,10 +15,10 @@ public class Mode {
             selectNumber = scan.nextInt();
             switch (selectNumber) {
                 case 1:
-                    new Console();
+                    new Console(); // -- Запуск приложения в консольном режиме --
                     break;
                 case 2:
-                    new GUI();
+                    new GUI();     // -- Запуск приложения в графическом режиме --
                     break;
             }
         }

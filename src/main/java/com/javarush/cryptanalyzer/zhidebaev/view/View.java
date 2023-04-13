@@ -1,5 +1,5 @@
 package com.javarush.cryptanalyzer.zhidebaev.view;
 
 public interface View {
-    String[] getParametrs();
+    String[] getParameters();
 }

@@ -5,6 +5,7 @@ import java.io.IOException;
 
 public class EntryPoint {
     public static void main(String[] args) {
-        new Mode();
+
+        new Mode(); // -- Запуск экземпляра класса выбора Mode для выбора режима работы приложения --
     }
 }

@@ -5,7 +5,7 @@ import com.javarush.cryptanalyzer.zhidebaev.repository.ResultCode;
 
 public class NonExistingClass implements Function {
     @Override
-    public Result execute() {
+    public Result execute(String[] commandParameters){
 
         System.out.println("Non existing Class");
 
