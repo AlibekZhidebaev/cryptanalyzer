@@ -11,10 +11,12 @@ import java.io.FileReader;
 import java.io.FileWriter;
 
 public class Encoder implements Function{
-
+    private Encode encoderChars = new Encode();
     @Override
     public Result execute(String[] commandParameters) {
-        System.out.println("works Encode");
+
+        System.out.println("works Encoder");
+
         try (FileReader reader = new FileReader(commandParameters[0]); // -- Получение пути к файлу для чтения символов --
              FileWriter writer = new FileWriter(commandParameters[1])) // -- Получение пути к файлу для записи символов --
         {
@@ -24,11 +26,11 @@ public class Encoder implements Function{
                 // --Посимвольное чтение --
                 char symbol = (char) reader.read();
                 // -- Кодирование прочтенного символа с помощью метода экземпляра класса Encode --
-                writer.write(new Encode().encode(symbol, key));
+                writer.write(encoderChars.encode(symbol, key));
             }
 
         } catch (Exception ex) {
-            return new Result(ResultCode.ERROR, new ApplicationException("Encode error", ex));
+            return new Result(ResultCode.ERROR, new ApplicationException("Encoder error", ex));
         }
         return new Result(ResultCode.OK);
     }

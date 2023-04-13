@@ -5,21 +5,20 @@ import com.javarush.cryptanalyzer.zhidebaev.entity.Result;
 import com.javarush.cryptanalyzer.zhidebaev.exception.ApplicationException;
 import com.javarush.cryptanalyzer.zhidebaev.repository.ResultCode;
 import com.javarush.cryptanalyzer.zhidebaev.utilities.Decode;
+import com.javarush.cryptanalyzer.zhidebaev.utilities.Encode;
 
 
 import java.io.FileReader;
 import java.io.FileWriter;
 
 public class Decoder implements Function{
-    // -- Путь к файлу для чтения символов --
-    String sourceFile = FileConstants.ENCODED_FILE;
-    // -- Путь к файлу для записи символов --
-    String destinationFile = FileConstants.OUTPUT_FILE;
-    int key =3;
+   private Decode decoderChars = new Decode();
 
     @Override
     public Result execute(String[] commandParameters) {
-        System.out.println("works Decode");
+
+        System.out.println("works Decoder");
+
         try (FileReader reader = new FileReader(commandParameters[0]); // -- Получение пути к файлу для чтения символов --
              FileWriter writer = new FileWriter(commandParameters[1])) // -- Получение пути к файлу для записи символов --
         {
@@ -30,11 +29,11 @@ public class Decoder implements Function{
                 // --Посимвольное чтение --
                 char symbol = (char) reader.read();
                 // -- Декодирование прочтенного символа с помощью метода экземпляра класса Decode --
-                writer.write(new Decode().decode(symbol, key));
+                writer.write(decoderChars.decode(symbol, key));
             }
 
         } catch (Exception ex) {
-            return new Result(ResultCode.ERROR, new ApplicationException("Decode error", ex));
+            return new Result(ResultCode.ERROR, new ApplicationException("Decoder error", ex));
         }
         return new Result(ResultCode.OK);
     }
