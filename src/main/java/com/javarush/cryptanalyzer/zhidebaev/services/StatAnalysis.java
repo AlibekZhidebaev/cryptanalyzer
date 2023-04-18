@@ -7,13 +7,14 @@ import com.javarush.cryptanalyzer.zhidebaev.utilities.ReadingFromFile;
 import com.javarush.cryptanalyzer.zhidebaev.utilities.TotalStatisticsOfSymbols;
 import com.javarush.cryptanalyzer.zhidebaev.utilities.WritingToFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class StatAnalysis implements Function {
-    private String inputFile = "text\\encoded.txt";
+    private String inputFile = "text\\encode.txt";
     private String dictionaryFile = "text\\dictionary.txt";
     private String outputFile = "text\\output.txt";
 
@@ -49,8 +50,8 @@ public class StatAnalysis implements Function {
             System.out.println(symbolMappings);
 
             // ---------------------------------------------------------
-        }catch(Exception ex) {
-            return new Result(ResultCode.ERROR, new ApplicationException("StatAnalysis", ex));
+        } catch(Exception ex) {
+            return new Result(ResultCode.ERROR, new ApplicationException(ex.getMessage(),ex));
         }
         return new Result(ResultCode.OK);
     }

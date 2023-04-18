@@ -6,14 +6,12 @@ import com.javarush.cryptanalyzer.zhidebaev.repository.ResultCode;
 public class Result {
 
     private ResultCode resultcode;
-    private ApplicationException applicationexception;
+    private ApplicationException applicationexception = new ApplicationException("not found");
 
     public Result(ResultCode resultcode) {
-        super();
         this.resultcode = resultcode;
     }
     public Result(ResultCode resultcode, ApplicationException applicationexception) {
-        super();
         this.resultcode = resultcode;
         this.applicationexception = applicationexception;
     }
@@ -29,7 +27,7 @@ public class Result {
 
     @Override
     public String toString() {
-        return "Operation completed successfully = " + resultcode + "\n"
+        return "Operation status: " + resultcode + "\n"
                 + "ERROR: " + applicationexception;
     }
 }
