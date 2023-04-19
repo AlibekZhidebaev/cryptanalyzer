@@ -7,7 +7,7 @@ public class Encode {
     private final int AlphabetSize = CryptoAlphabet.ALPHABET_SIZE;
 
     // -- Метод кодирования символа с помощью ключа по методу Цезаря --
-    public char encode(char symbol, int key) {
+    public char encodeChar(char symbol, int key) {
 
         char changedCharacter = symbol;
         // -- преобразование ключа в позицию сдвига относительно символа --
@@ -24,4 +24,32 @@ public class Encode {
         }
         return changedCharacter;
     }
+
+    // -- Метод шифрования строк текста по методу Цезаря --
+    public String encodeString (String text, int key) {
+
+        String outputText = "";
+        int positionIndex = 0;
+        StringBuilder output = new StringBuilder(outputText);
+
+        // -- преобразование ключа в позицию сдвига относительно символа --
+        int movePosition = (key + AlphabetSize) % AlphabetSize;
+
+        for (int i = 0; i < text.length(); i++) {
+            char symbol = text.charAt(i);               // -- Получение символа из массива строки по указанному индексу --
+            if (Alphabet.lastIndexOf(symbol) != -1) {   // -- Игнорирование символов отсутсвующих в указанном криптоалфавите --
+                positionIndex = Alphabet.lastIndexOf(symbol) + movePosition;	// -- Сдвиг относительно символа --
+                // -- Преобразование полученного индекса позиции в результате сдвига, если выходит за пределы криптоалфавита --
+                if (positionIndex > (AlphabetSize - 1)) {positionIndex = positionIndex - AlphabetSize;}
+                if (positionIndex < 0) { positionIndex = positionIndex + AlphabetSize;}
+                // -- Получение символа в криптоалфавите по указанному индексу после сдвига --
+                symbol = Alphabet.charAt(positionIndex);
+            }
+            output.append(symbol); // -- Добавление символа в новую строку --
+            outputText = output.toString();
+        }
+        return outputText;
+    }
+
+
 }

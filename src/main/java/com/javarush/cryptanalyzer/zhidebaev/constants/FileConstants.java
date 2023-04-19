@@ -10,9 +10,10 @@ public final class FileConstants {
     public static final String INPUT_FILE =DIRECTORY+SLASH+INPUT;
     public static final String ENCODED_FILE =DIRECTORY+SLASH+ENCODED;
     public static final String OUTPUT_FILE =DIRECTORY+SLASH+OUTPUT;
+    public static final String REGEX = "([а-яёА-ЯЁ]+(\\s|,\\s|.\\s|:\\s|\\s-\\s)){3,}";
     public static final String EMPTY = "";
-
     public static final String INPUT_FILE_NAME = "Входной файл: ";
     public static final String OUTPUT_FILE_NAME = "Выходной файл: ";
     public static final String KEY_NAME = "Ключ: ";
+
 }
