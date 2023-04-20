@@ -10,25 +10,36 @@ import java.util.Scanner;
 
 // -- Класс-оболочка консольного режима --
 public class Console {
-    private int choiceNumber ;
+
     private List<String> parameters;
     private String command;
     private ConsoleView consoleview;
     private boolean launch = true;
 
     public Console(){
+        // -- Поле выбора команд --
         System.out.println("Select operation number:\n"
                 + "1.ENCODE\n"
                 + "2.DECODE\n"
                 + "3.Brute force\n"
                 + "4.Statistical analysis\n"
+                + "5.EXIT\n"
         );
-
         try (Scanner scan = new Scanner(System.in)) {
-            while (launch) {
-                choiceNumber = scan.nextInt();
+            int selectNumber;
+            // -- Проверка корректности ввода --
+            do {
+                System.out.print("Enter a number from 1 to 5: ");
+                while (!scan.hasNextInt()) { // -- Если введенные данные не числа --
+                    System.out.println("You didn't enter a number. Try again.");
+                    scan.next();
+                }
+                selectNumber = scan.nextInt();
+            } while (selectNumber <= 0 || selectNumber > 5); // -- Если введенные числа не от 1го до 5ти --
 
-                switch (choiceNumber) {
+            // -- Поле выбора команд --
+            while (launch) {
+                switch (selectNumber) {
                     case 1:
                         parameters = getParametrsForEncoder();
                         break;
@@ -42,13 +53,8 @@ public class Console {
                         parameters = getParametrsForStatAnalysis();
                         break;
                     case 5:
-                        parameters = getParametrsForNonExistingClass();
+                        System.out.println("Application complete! Goodbye, see you again."); System. exit(0);
                         break;
-                    default:
-                        launch = false;
-                        System.out.println("Application complete! Goodbye, see you again.");
-                        break;
-
                 }
                 // -- Передача выбранной команды в виде параметра в экземпляр класса ConsoleView --
                 consoleview = new ConsoleView(parameters);
@@ -57,6 +63,7 @@ public class Console {
             }
         }
     }
+
 
     //------------------------Метод для получения параметров Encoder'a---------------------------------------------
 
