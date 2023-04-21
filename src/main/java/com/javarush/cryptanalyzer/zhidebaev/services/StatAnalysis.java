@@ -25,9 +25,10 @@ public class StatAnalysis implements Function {
 
     @Override
     public Result execute(String[] commandParameters) {
-
+             System.out.println("----------------------");
+             System.out.println(" works StatAnalysis");
+             System.out.println("------- Result -------");
         try {
-            System.out.println("works StatAnalysis");
             // -- Чтение текста из файла в виде массива символов --
             char[] sourceTextSymbols = new ReadingFromFile(inputFile).getFileAsArrayOfCharactersToLowerCase();
             char[] dictionarySymbols = new ReadingFromFile(dictionaryFile).getFileAsArrayOfCharactersToLowerCase();

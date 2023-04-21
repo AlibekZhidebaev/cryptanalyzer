@@ -1,5 +1,6 @@
 package com.javarush.cryptanalyzer.zhidebaev.view;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -12,7 +13,7 @@ public class ConsoleView implements View{
     // -- Метод получающий список параметров с экземпляра класса-оболочки Console --
     @Override
     public String[] getParameters() {
-        String[] param = { parameters.get(0),parameters.get(1),parameters.get(2),parameters.get(3) };
+        String[] param = parameters.toArray(new String[0]);
         return param;
     }
 }

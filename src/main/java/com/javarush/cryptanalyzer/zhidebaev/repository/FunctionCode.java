@@ -3,12 +3,10 @@ package com.javarush.cryptanalyzer.zhidebaev.repository;
 import com.javarush.cryptanalyzer.zhidebaev.services.*;
 
 public enum FunctionCode {
-
     ENCODE (new Encoder()), // -- команда запускающий Кодировщик (класс Encoder()) --
     DECODE (new Decoder()), // -- команда запускающий Декодер (класс Decoder()) --
     BRUTEFORCE (new BruteForcer()), // -- команда запускающий Брут форс (класс BruteForcer()) --
-    STAT_ANALYSIS (new StatAnalysis()), // -- команда запускающий статистический анализатор (класс StatAnalysis()) --
-    NONEXISTCLASS (new NonExistingClass()); // -- команда указывающая на несуществующий класс (класс NonExistingClass()) --
+    STAT_ANALYSIS (new StatAnalysis()); // -- команда запускающий статистический анализатор (класс StatAnalysis()) --
 
     private final Function function;
     FunctionCode(Function function){

@@ -22,8 +22,10 @@ public class BruteForcer implements Function {
 
     @Override
     public Result execute(String[] commandParameters){
+            System.out.println("----------------------");
+            System.out.println("  works BruteForcer");
+            System.out.println("------- Result -------");
         try {
-            System.out.println("works BruteForcer");
             encodedFile = commandParameters[0]; // -- Получение пути к файлу для чтения символов --
             outputFile = commandParameters[1];  // -- Получение пути к файлу для записи символов --
 
