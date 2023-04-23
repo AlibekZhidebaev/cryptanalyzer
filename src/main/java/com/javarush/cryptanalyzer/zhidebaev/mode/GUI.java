@@ -1,18 +1,30 @@
 package com.javarush.cryptanalyzer.zhidebaev.mode;
 
+import com.javarush.cryptanalyzer.zhidebaev.constants.FileConstants;
+import com.javarush.cryptanalyzer.zhidebaev.repository.FunctionCode;
+import com.javarush.cryptanalyzer.zhidebaev.run.Run;
+import com.javarush.cryptanalyzer.zhidebaev.utilities.Validate;
+import com.javarush.cryptanalyzer.zhidebaev.view.ConsoleView;
+import com.javarush.cryptanalyzer.zhidebaev.view.GUIView;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
+import java.util.List;
 
 public class GUI {
     private final JFrame frame;
-    private final JPanel  panel_decode, panel_decode_buttons;
-    private JTextField txt_in_file, txt_out_file , keyField, decode_key_field;
-    private JRadioButton radioButtonEncode,radioButtonDecode, radioButtonOtherDecode;
+    private final JPanel panel_decode, panel_decode_buttons;
+    private JTextField txt_in_file, txt_out_file, keyField, decode_key_field;
+    private JRadioButton radioButtonEncode, radioButtonDecode, radioButtonOtherDecode;
     private JButton buttonEncode, buttonDecode;
-    public GUI(){
+    private List<String> parameters;
+    private int selectNumber;
+
+
+    public GUI() {
 
 //---------------------------------------------Фрейм------------------------------------------------------------
 
@@ -32,12 +44,12 @@ public class GUI {
         header.setLayout(new BoxLayout(header, BoxLayout.Y_AXIS));
 //---------------------------------------------Панель для выбора режима------------------------------------------------------------
         JPanel panel_mode = new JPanel();
-        panel_mode.setBorder(new TitledBorder(null, "\u0420\u0435\u0436\u0438\u043C \u0440\u0430\u0431\u043E\u0442\u044B", TitledBorder.CENTER, TitledBorder.TOP, null, null));
+        panel_mode.setBorder(new TitledBorder(null, "Режим работы", TitledBorder.CENTER, TitledBorder.TOP, null, null));
 //---------------------------------------------Основная панель для шифрования файла------------------------------------------------------------
         JPanel panel_encode = new JPanel();
         panel_encode.setLayout(new BoxLayout(panel_encode, BoxLayout.Y_AXIS));
         panel_encode.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)),
-                "\u0428\u0438\u0444\u0440\u043E\u0432\u0430\u043D\u0438\u0435 \u043C\u0442\u043E\u0434\u043E\u043C \u0426\u0435\u0437\u0430\u0440\u044F",
+                "Шифрование методом Цезаря",
                 TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 
 //---------------------------------------------Панель для входного файла------------------------------------------------------------
@@ -62,7 +74,7 @@ public class GUI {
         panel_decode = new JPanel();
         panel_decode.setLayout(new BoxLayout(panel_decode, BoxLayout.X_AXIS));
         panel_decode.setBackground(UIManager.getColor("RadioButtonMenuItem.background"));
-        panel_decode.setBorder(new TitledBorder(null, "\u0420\u0430\u0441\u0448\u0438\u0444\u0440\u043E\u0432\u043A\u0430 \u0442\u0435\u043A\u0441\u0442\u0430",
+        panel_decode.setBorder(new TitledBorder(null, "Расшифровка текста",
                 TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
         panel_decode.setVisible(false);
 //----------------------------------------Панель инструментов для расшифровки----------------------------------------------------------------------
@@ -95,11 +107,11 @@ public class GUI {
 //--------------------------------------Текстовые поля и области---------------------------------------------------------------
         txt_in_file = new JTextField();
         txt_in_file.setColumns(50);
-        txt_in_file.setText("\\files\\input.txt");
+        txt_in_file.setText(FileConstants.INPUT_FILE);
 
         txt_out_file = new JTextField();
         txt_out_file.setColumns(50);
-        txt_out_file.setText("\\files\\output.txt");
+        txt_out_file.setText(FileConstants.ENCODED_FILE);
 
         keyField = new JTextField();
         keyField.setText("0");
@@ -160,7 +172,7 @@ public class GUI {
         panel_decode.add(text_area_for_encode);
 
 //------------------Полосы прокрутки для text area-------------------------------
-        JScrollPane scrollPane = new JScrollPane(text_area_for_encode,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        JScrollPane scrollPane = new JScrollPane(text_area_for_encode, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         panel_decode.add(scrollPane);
 
 //-------------------------------------------Добавление элементов в панель дешифрования -----------------------------------------------------------
@@ -186,36 +198,66 @@ public class GUI {
         frame.getContentPane().add(panel_decode_buttons, BorderLayout.SOUTH);
 
 //--------------События----------------------------------------------------------------------------------
-        radioButtonEncode.addActionListener(e->setSelectedEncode());
-        radioButtonDecode.addActionListener(e->setSelectedDecode());
-        radioButtonOtherDecode.addActionListener(e->setSelectedOtherDecode());
+        radioButtonEncode.addActionListener(e -> setSelectedEncode());
+        radioButtonDecode.addActionListener(e -> setSelectedDecode());
+        radioButtonOtherDecode.addActionListener(e -> setSelectedOtherDecode());
 
-        buttonEncode.addActionListener(e-> System.out.println("1"));
-        buttonDecode.addActionListener(e-> System.out.println("2"));
+        buttonEncode.addActionListener(e -> selectNumber = 1);
+        buttonDecode.addActionListener(e -> selectNumber = 2);
 
 //--------------------------------------------------------------------------------------------------------------------------------------------------
 
         frame.setVisible(true);
+
+        //-- 1111111111111111111111111111111111111111
+        while (true) {
+            // -- Проверка корректности ввода --
+            //  int selectNumber = Validate.inputValidation(scan, 1, 5);
+
+            // -- Поле выбора команд --
+            switch (selectNumber) {
+                case 1 ->
+                        parameters = List.of(FunctionCode.ENCODE.toString(), txt_in_file.getText(), txt_out_file.getText(), keyField.getText());
+                case 2 ->
+                        parameters = List.of(FunctionCode.DECODE.toString(), txt_in_file.getText(), txt_out_file.getText(), keyField.getText());
+                //   case 3 ->
+                //        parameters = List.of(FunctionCode.BRUTEFORCE.toString(), txt_in_file.getText(), txt_out_file.getText());
+                //  case 4 ->
+                //           parameters = List.of(FunctionCode.STAT_ANALYSIS.toString(), txt_in_file.getText(), txt_out_file.getText());
+            }
+            // -- Передача выбранной команды в виде параметра в экземпляр класса ConsoleView --
+            GUIView guiView = new GUIView(parameters);
+            // -- Передача экземпляра класса ConsoleView в виде параметра в исполняющий класс Run (Запуск) --
+            new Run(guiView);
+        }
+        // -- 1111111111111111111111111111111111111111
     }
 
     //-------------------------Методы---------------------------------------------------------------------
-    void setSelectedEncode(){
-        radioButtonDecode.setSelected(false);radioButtonOtherDecode.setSelected(false);
-        buttonDecode.setVisible(false);buttonEncode.setVisible(true);
+    void setSelectedEncode() {
+        radioButtonDecode.setSelected(false);
+        radioButtonOtherDecode.setSelected(false);
+        buttonDecode.setVisible(false);
+        buttonEncode.setVisible(true);
         frame.setSize(715, 215);
         frameResize();
     }
 
-    void setSelectedDecode(){
-        radioButtonEncode.setSelected(false);radioButtonOtherDecode.setSelected(false);
-        buttonEncode.setVisible(false);buttonDecode.setVisible(true);
+    void setSelectedDecode() {
+        radioButtonEncode.setSelected(false);
+        radioButtonOtherDecode.setSelected(false);
+        buttonEncode.setVisible(false);
+        buttonDecode.setVisible(true);
         frame.setSize(715, 215);
         frameResize();
     }
 
-    void setSelectedOtherDecode(){
-        radioButtonOtherDecode.setSelected(true);radioButtonEncode.setSelected(false);radioButtonDecode.setSelected(false);
-        buttonEncode.setVisible(false);buttonDecode.setVisible(true);
+    void setSelectedOtherDecode() {
+        radioButtonOtherDecode.setSelected(true);
+        radioButtonEncode.setSelected(false);
+        radioButtonDecode.setSelected(false);
+        buttonEncode.setVisible(false);
+        buttonDecode.setVisible(true);
         panel_decode.setVisible(true);
         panel_decode_buttons.setVisible(true);
         frame.setSize(715, 500);

@@ -5,12 +5,13 @@ import com.javarush.cryptanalyzer.zhidebaev.repository.ResultCode;
 
 public class Result {
 
-    private ResultCode resultcode;
-    private ApplicationException applicationexception = new ApplicationException("not found");
+    private final ResultCode resultcode;
+    private ApplicationException applicationexception = new ApplicationException();
 
     public Result(ResultCode resultcode) {
         this.resultcode = resultcode;
     }
+
     public Result(ResultCode resultcode, ApplicationException applicationexception) {
         this.resultcode = resultcode;
         this.applicationexception = applicationexception;

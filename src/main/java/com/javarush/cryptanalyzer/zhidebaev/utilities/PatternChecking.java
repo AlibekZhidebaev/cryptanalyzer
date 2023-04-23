@@ -6,13 +6,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class PatternChecking {
-    private String regex = FileConstants.REGEX;
-    private boolean patternIsValid = false;
-    private StringBuilder text = new StringBuilder();
+    static private boolean patternIsValid = false;
+    static private final StringBuilder text = new StringBuilder();
 
     // -- Метод проверки строки на соответствие регулярному выражению --
-    public boolean getPatternIsValid(String texts) {
+    public static boolean getPatternIsValid(String texts) {
         text.append(texts);
+        String regex = FileConstants.REGEX;
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(text);
         if (matcher.find()) patternIsValid = true;

@@ -3,11 +3,11 @@ package com.javarush.cryptanalyzer.zhidebaev.utilities;
 import com.javarush.cryptanalyzer.zhidebaev.constants.CryptoAlphabet;
 
 public class Encode {
-    private final String Alphabet = CryptoAlphabet.ALPHABET;
-    private final int AlphabetSize = CryptoAlphabet.ALPHABET_SIZE;
+    private  static final String Alphabet = CryptoAlphabet.ALPHABET;
+    private  static final int AlphabetSize = CryptoAlphabet.ALPHABET_SIZE;
 
     // -- Метод кодирования символа с помощью ключа по методу Цезаря --
-    public char encodeChar(char symbol, int key) {
+    public static char encodeChar(char symbol, int key) {
 
         char changedCharacter = symbol;
         // -- преобразование ключа в позицию сдвига относительно символа --
@@ -26,10 +26,10 @@ public class Encode {
     }
 
     // -- Метод шифрования строк текста по методу Цезаря --
-    public String encodeString (String text, int key) {
+    public static String encodeString (String text, int key) {
 
         String outputText = "";
-        int positionIndex = 0;
+        int positionIndex;
         StringBuilder output = new StringBuilder(outputText);
 
         // -- преобразование ключа в позицию сдвига относительно символа --

@@ -1,8 +1,8 @@
 package com.javarush.cryptanalyzer.zhidebaev.exception;
 
-public class ApplicationException extends RuntimeException{
+public class ApplicationException extends RuntimeException {
     public ApplicationException() {
-        super();
+        super("not found");
     }
 
     public ApplicationException(String message, Throwable cause) {
@@ -10,11 +10,16 @@ public class ApplicationException extends RuntimeException{
     }
 
     public ApplicationException(String message) {
-       super(message);
+        super(message);
 
     }
 
     public ApplicationException(Throwable cause) {
         super(cause);
+    }
+
+    @Override
+    public String toString() {
+        return getMessage().toString();
     }
 }

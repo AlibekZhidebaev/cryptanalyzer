@@ -8,16 +8,15 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class ReadingFromFile {
-    private Path pathInputFile;
-    private boolean isThisFileAndDoesExist;
-    private String inputFile,textString;
+    private final Path pathInputFile;
+    private final String inputFile;
     private char[] textChars;
 
     public ReadingFromFile(String inputFile) throws ApplicationException {
         this.inputFile = inputFile;
         Path pathFile = Paths.get(inputFile);
         // -- Проверка файла на присутствие и доступность --
-        isThisFileAndDoesExist = Files.isRegularFile(pathFile) && Files.exists(pathFile);
+        boolean isThisFileAndDoesExist = Files.isRegularFile(pathFile) && Files.exists(pathFile);
         if(isThisFileAndDoesExist) this.pathInputFile = pathFile;
         // -- В случае недоступности файла бросаем исключение --
         else throw new ApplicationException("File with path: \"" + inputFile +"\" not found!");
@@ -25,6 +24,8 @@ public class ReadingFromFile {
 
     // -- Метод, возвращающий содержание файла в виде текстовой строки --
     public String getFileAsString()  throws ApplicationException {
+        //inputFileValidation(inputFile);
+        String textString;
         try {
             textString = Files.readString(pathInputFile, Charset.defaultCharset());
         } catch (IOException e) {
@@ -44,5 +45,4 @@ public class ReadingFromFile {
         textChars = getFileAsString().toLowerCase().toCharArray();
         return textChars;
     }
-
 }

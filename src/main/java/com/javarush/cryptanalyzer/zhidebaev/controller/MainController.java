@@ -5,8 +5,9 @@ import com.javarush.cryptanalyzer.zhidebaev.services.Function;
 import com.javarush.cryptanalyzer.zhidebaev.view.View;
 import com.javarush.cryptanalyzer.zhidebaev.repository.FunctionCode;
 
+@SuppressWarnings("ALL")
 public class MainController {
-    private View view;
+    private final View view;
 
     public MainController(View view) {
         this.view = view;
@@ -15,12 +16,12 @@ public class MainController {
     public View getView() {
         return view;
     }
-    // -- Метод для выполнения (excecute()) действия с заданными параметрами --
-    public Result execute (String command, String[] commandParameters) {
+
+    // -- Метод для выполнения (execute()) действия с заданными параметрами --
+    public Result execute(String command, String[] commandParameters) {
         // -- Передаем параметр command в метод find() (найти) класса-списка FunctionCode и выполняем его --
         Function function = FunctionCode.find(command);
         // -- В метод execute() (выполнить),найденной команды, передаем параметр commandParameters и выполняем --
-        Result result = function.execute(commandParameters);
-        return result;
+        return function.execute(commandParameters);
     }
 }

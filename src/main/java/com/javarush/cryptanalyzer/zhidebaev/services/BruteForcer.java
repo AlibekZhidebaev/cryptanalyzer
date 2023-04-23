@@ -1,24 +1,15 @@
 package com.javarush.cryptanalyzer.zhidebaev.services;
 
 import com.javarush.cryptanalyzer.zhidebaev.constants.CryptoAlphabet;
-import com.javarush.cryptanalyzer.zhidebaev.constants.FileConstants;
 import com.javarush.cryptanalyzer.zhidebaev.entity.Result;
 import com.javarush.cryptanalyzer.zhidebaev.exception.ApplicationException;
 import com.javarush.cryptanalyzer.zhidebaev.repository.ResultCode;
-import com.javarush.cryptanalyzer.zhidebaev.utilities.*;
-
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
+import com.javarush.cryptanalyzer.zhidebaev.utilities.Decode;
+import com.javarush.cryptanalyzer.zhidebaev.utilities.PatternChecking;
+import com.javarush.cryptanalyzer.zhidebaev.utilities.ReadingFromFile;
+import com.javarush.cryptanalyzer.zhidebaev.utilities.WritingToFile;
 
 public class BruteForcer implements Function {
-    String  encodedFile = FileConstants.ENCODED_FILE,
-            outputFile = FileConstants.OUTPUT_FILE;
-    private int correctKey;
-    private String encodedText, decodedText;
-    private final Decode decoderText = new Decode();
-    private PatternChecking patternChecking = new PatternChecking();
-
 
     @Override
     public Result execute(String[] commandParameters){
@@ -26,21 +17,21 @@ public class BruteForcer implements Function {
             System.out.println("  works BruteForcer");
             System.out.println("------- Result -------");
         try {
-            encodedFile = commandParameters[0]; // -- Получение пути к файлу для чтения символов --
-            outputFile = commandParameters[1];  // -- Получение пути к файлу для записи символов --
+            String encodedFile = commandParameters[0]; // -- Получение пути к файлу для чтения символов --
+            String outputFile = commandParameters[1];  // -- Получение пути к файлу для записи символов --
 
             // -- Чтение текста из указного файла в виде строки текста --
-            encodedText = new ReadingFromFile(encodedFile).getFileAsString();
+            String encodedText = new ReadingFromFile(encodedFile).getFileAsString();
 
             // -- Дешифруем текст с перебором ключа --
             for (int key = 1; key < CryptoAlphabet.ALPHABET_SIZE; key++) {
                 // -- Дешифруем текст с перебором ключа --
-                decodedText = decoderText.decodeString(encodedText, key);
+                String decodedText = Decode.decodeString(encodedText, key);
                 // -- Проверка дешифрованного текста на соответствие регулярному выражению --
-                 if (patternChecking.getPatternIsValid(decodedText) == true) {
+                 if (PatternChecking.getPatternIsValid(decodedText)) {
                 // -- Если соответствие подвержено, записываем текст в файл назначения --
-                correctKey = key; new WritingToFile(outputFile,decodedText);
-                System.out.println("Correct key: = " + correctKey);
+                     new WritingToFile(outputFile, decodedText);
+                System.out.println("Correct key: = " + key);
                 break;
                 }
             }
