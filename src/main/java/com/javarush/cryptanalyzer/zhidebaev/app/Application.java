@@ -7,6 +7,12 @@ import java.util.Arrays;
 
 public class Application {
     private final MainController maincontroller;
+    private String command;
+    public String getCommand() {
+        return command;
+    }
+
+
 
     public Application(MainController maincontroller) {
         this.maincontroller = maincontroller;
@@ -17,7 +23,7 @@ public class Application {
         // -- С помощью контроллера maincontroller получаем параметры с интерфейса View в виде массива строк --
         String[] parameters = maincontroller.getView().getParameters();
         // -- 1-й элемент массива назначаем как команду --
-        String command = parameters[0];
+        command = parameters[0];
         // -- Остальные элементы назначаем,как параметры назначенной команды --
         String[] commandParameters = Arrays.copyOfRange(parameters, 1, parameters.length);
         // -- Передаем команду с параметрами в метод execute (выполнить) контроллера maincontroller и запускаем его --

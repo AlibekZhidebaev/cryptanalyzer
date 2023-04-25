@@ -19,9 +19,6 @@ public class StatAnalysis implements Function {
 
     @Override
     public Result execute(String[] commandParameters) {
-             System.out.println("----------------------");
-             System.out.println(" works StatAnalysis");
-             System.out.println("------- Result -------");
         try {
             String inputFile = commandParameters[0];  // -- Получение пути к файлу для чтения символов --
             String outputFile = commandParameters[1]; // -- Получение пути к файлу для записи символов --
@@ -44,8 +41,9 @@ public class StatAnalysis implements Function {
                 if(symbolMappings.containsKey(sourceTextSymbols[i]))
                     // -- Если такой символ существует, то по ключу меняем на соответсвующее значение в карте --
                     // -- и каждый символ преобразовываем в строку --
-                    outputText.append(sourceTextSymbols[i] = symbolMappings.get(sourceTextSymbols[i]));
+                   outputText.append(sourceTextSymbols[i] = symbolMappings.get(sourceTextSymbols[i]));
                 // -- Если символ отсутствует, то оставляем без изменении --
+
                 else outputText.append(sourceTextSymbols[i]);
             }
             // -- Запись текста в файл назначения --

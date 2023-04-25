@@ -15,7 +15,12 @@ public class Run {
         MainController maincontroller = new MainController(view);
         Application application = new Application(maincontroller);
         Result result = application.run();
-        if (view instanceof ConsoleView) System.out.println(result);
-        else JOptionPane.showMessageDialog(null, "Результат: " + result);
+        if (view instanceof ConsoleView) {
+            System.out.println("-".repeat(30));
+            System.out.println(" ".repeat(8) + "works "+ application.getCommand());
+            System.out.println("-".repeat(11)+" Result "+"-".repeat(11));
+            System.out.println(result);}
+        else JOptionPane.showMessageDialog(null, result,"Результат",JOptionPane.INFORMATION_MESSAGE);
     }
+
 }

@@ -13,9 +13,6 @@ public class BruteForcer implements Function {
 
     @Override
     public Result execute(String[] commandParameters){
-            System.out.println("----------------------");
-            System.out.println("  works BruteForcer");
-            System.out.println("------- Result -------");
         try {
             String encodedFile = commandParameters[0]; // -- Получение пути к файлу для чтения символов --
             String outputFile = commandParameters[1];  // -- Получение пути к файлу для записи символов --
@@ -31,7 +28,7 @@ public class BruteForcer implements Function {
                  if (PatternChecking.getPatternIsValid(decodedText)) {
                 // -- Если соответствие подвержено, записываем текст в файл назначения --
                      new WritingToFile(outputFile, decodedText);
-                System.out.println("Correct key: = " + key);
+               // System.out.println("Correct key: = " + key);
                 break;
                 }
             }

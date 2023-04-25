@@ -16,16 +16,6 @@ public class Result {
         this.resultcode = resultcode;
         this.applicationexception = applicationexception;
     }
-
-    public ResultCode getResultcode() {
-        return resultcode;
-    }
-
-    public ApplicationException getApplicationexception() {
-        return applicationexception;
-    }
-
-
     @Override
     public String toString() {
         return "Operation status: " + resultcode + "\n"

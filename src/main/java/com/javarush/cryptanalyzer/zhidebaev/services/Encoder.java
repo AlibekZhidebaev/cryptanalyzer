@@ -12,9 +12,7 @@ public class Encoder implements Function {
 
     @Override
     public Result execute(String[] commandParameters) {
-        System.out.println("----------------------");
-        System.out.println("    works Encoder");
-        System.out.println("------- Result -------");
+
         try {
             String inputFile = commandParameters[0];   // -- Получение пути к файлу для чтения символов --
             String encodedFile = commandParameters[1]; // -- Получение пути к файлу для записи символов --
